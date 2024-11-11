@@ -1,7 +1,7 @@
 <?php 
 
-require_once('../../config/conexion.php');
 require_once('../../util/manejoCore.php');
+require_once('../../config/conexion.php');
 
 // Consulta para obtener Cursos
 $sql ="SELECT cursos.id, cursos.nombre as curso FROM `cursos`;";

@@ -1,7 +1,7 @@
 <?php 
 
-require_once('../../config/conexion.php');
 require_once('../../util/manejoCore.php');
+require_once('../../config/conexion.php');
 
 // Consulta para obtener Niveles 
 $sql ="SELECT niveles.id, niveles.nivel FROM `niveles`;";
