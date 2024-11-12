@@ -4,10 +4,22 @@ require_once("../../util/manejoCore.php");
 require_once("../../config/conexion.php");
 
     // Consulta para obtener Pasos de Bachata
-$sql ="SELECT bachata.id, niveles.nivel, tipo_baile.tipo , bachata.paso 
-FROM bachata
-INNER JOIN niveles ON bachata.idnivel = niveles.id
-INNER JOIN tipo_baile ON bachata.idtipo = tipo_baile.id
+$sql ="SELECT 
+    pasos.id, 
+    cursos.nombre AS curso, 
+    niveles.nivel, 
+    tipo_baile.tipo, 
+    pasos.paso 
+FROM 
+    pasos
+INNER JOIN 
+    cursos ON pasos.idcurso = cursos.id
+INNER JOIN 
+    niveles ON pasos.idnivel = niveles.id
+INNER JOIN 
+    tipo_baile ON pasos.idtipo = tipo_baile.id
+WHERE 
+    pasos.idcurso = 2
 ORDER BY 
     CASE niveles.nivel
         WHEN 'Básico' THEN 1

@@ -4,9 +4,22 @@
     require_once("../../config/conexion.php");
 
     // Consulta para obtener Pasos de Casino
-$sql ="SELECT casino.id, niveles.nivel, casino.paso 
-FROM `casino`
-INNER JOIN niveles ON casino.idnivel = niveles.id
+$sql ="SELECT 
+    pasos.id, 
+    cursos.nombre AS curso, 
+    niveles.nivel, 
+    tipo_baile.tipo, 
+    pasos.paso 
+FROM 
+    pasos
+INNER JOIN 
+    cursos ON pasos.idcurso = cursos.id
+INNER JOIN 
+    niveles ON pasos.idnivel = niveles.id
+INNER JOIN 
+    tipo_baile ON pasos.idtipo = tipo_baile.id
+WHERE 
+    pasos.idcurso = 3
 ORDER BY 
     CASE niveles.nivel
         WHEN 'Básico' THEN 1

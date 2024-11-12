@@ -4,10 +4,22 @@
     require_once("../../config/conexion.php");
 
     // Consulta para obtener Pasos de Salsa En linea
-$sql ="SELECT salsa_en_linea.id, niveles.nivel, tipo_baile.tipo , salsa_en_linea.paso 
-FROM salsa_en_linea
-INNER JOIN niveles ON salsa_en_linea.idnivel = niveles.id
-INNER JOIN tipo_baile ON salsa_en_linea.idtipo = tipo_baile.id
+$sql ="SELECT 
+    pasos.id, 
+    cursos.nombre AS curso, 
+    niveles.nivel, 
+    tipo_baile.tipo, 
+    pasos.paso 
+FROM 
+    pasos
+INNER JOIN 
+    cursos ON pasos.idcurso = cursos.id
+INNER JOIN 
+    niveles ON pasos.idnivel = niveles.id
+INNER JOIN 
+    tipo_baile ON pasos.idtipo = tipo_baile.id
+WHERE 
+    pasos.idcurso = 1
 ORDER BY 
     CASE niveles.nivel
         WHEN 'Básico' THEN 1
