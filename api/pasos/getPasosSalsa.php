@@ -6,8 +6,11 @@
     // Consulta para obtener Pasos de Salsa En linea
 $sql ="SELECT 
     pasos.id, 
+    cursos.id as idcurso,
     cursos.nombre AS curso, 
+    niveles.id as idnivel,
     niveles.nivel, 
+    tipo_baile.id as idtipo,
     tipo_baile.tipo, 
     pasos.paso 
 FROM 

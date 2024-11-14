@@ -6,8 +6,11 @@
     // Consulta para obtener Pasos de Casino
 $sql ="SELECT 
     pasos.id, 
+    cursos.id AS idcurso,
     cursos.nombre AS curso, 
+    niveles.id AS idnivel,
     niveles.nivel, 
+    tipo_baile.id as idtipo,
     tipo_baile.tipo, 
     pasos.paso 
 FROM 

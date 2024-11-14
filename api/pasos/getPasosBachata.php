@@ -6,8 +6,11 @@ require_once("../../config/conexion.php");
     // Consulta para obtener Pasos de Bachata
 $sql ="SELECT 
     pasos.id, 
-    cursos.nombre AS curso, 
+    cursos.id as idcurso,
+    cursos.nombre AS curso,
+    niveles.id AS idnivel,
     niveles.nivel, 
+    tipo_baile.id AS idtipo,
     tipo_baile.tipo, 
     pasos.paso 
 FROM 
