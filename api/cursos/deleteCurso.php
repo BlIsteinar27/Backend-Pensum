@@ -3,37 +3,32 @@
 require_once('../../util/manejoCore.php');
 require_once('../../config/conexion.php');
 
-// Obtener el ID del paso a eliminar
+// Obtener el ID del autor desde la URL
 $id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
-// Verificar que el ID sea válido
-if ($id <= 0) {
-    die(json_encode(["success" => false, "message" => "ID inválido."]));
-}
-
-// Preparar y ejecutar la consulta
-$sql = "DELETE FROM cursos WHERE id = ?";
-$stmt = $conn->prepare($sql);
-
-if ($stmt === false) {
-    die(json_encode(["success" => false, "message" => "Error en la preparación de la consulta: " . $conn->error]));
-}
-
-$stmt->bind_param("i", $id);
-
-if ($stmt->execute()) {
-    if ($stmt->affected_rows > 0) {
-        echo json_encode(["success" => true, "message" => "Curso eliminado del pensum exitosamente."]);
-    } else {
-        echo json_encode(["success" => false, "message" => "No se encontró ningún curso con ese ID."]);
+if ($id > 0) {
+    // Preparar la consulta SQL para eliminar el autor
+    $sql = "DELETE FROM cursos WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    
+    if ($stmt === false) {
+        die(json_encode(["success" => false, "message" => "Error en la preparación de la consulta: " . $conn->error]));
     }
+
+    // Vincular el parámetro y ejecutar la consulta
+    $stmt->bind_param("i", $id);
+
+    if ($stmt->execute()) {
+        echo json_encode(["success" => true, "message" => "Curso eliminado exitosamente."]);
+    } else {
+        echo json_encode(["success" => false, "message" => "Ocurrió un error al eliminar el curso: " . $stmt->error]);
+    }
+
+    $stmt->close();
 } else {
-    error_log("Error al eliminar el curso: " . $stmt->error);
-    echo json_encode(["success" => false, "message" => "Ocurrió un error al eliminar el curso."]);
+    echo json_encode(["success" => false, "message" => "ID de curso no válido."]);
 }
 
-// Cerrar conexión
-$stmt->close();
 $conn->close();
 
 ?>
